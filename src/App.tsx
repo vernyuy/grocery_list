@@ -121,7 +121,7 @@ const App: React.FC = () => {
 
           const match = cleanedMsg.match(/https?:\/\/[^\s]+/);
           if (match) {
-            const url = match[0];
+            let url = match[0];
             const cleanText = cleanedMsg
               .replace(url, "")
               .trim()
@@ -130,6 +130,8 @@ const App: React.FC = () => {
             const { intro, products, closing } = parseMessage(cleanText);
 
             setState({ intro, products, closing });
+
+            url = url.replace("This", "");
             setLink(url);
           }
           setprocessing(false);
