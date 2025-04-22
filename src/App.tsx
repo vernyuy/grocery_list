@@ -121,7 +121,7 @@ const App: React.FC = () => {
 
           const match = cleanedMsg.match(/https?:\/\/[^\s]+/);
           if (match) {
-            let url = match[0];
+            const url = match[0];
             const cleanText = cleanedMsg
               .replace(url, "")
               .trim()
@@ -130,8 +130,6 @@ const App: React.FC = () => {
             const { intro, products, closing } = parseMessage(cleanText);
 
             setState({ intro, products, closing });
-
-            url = url.replace("This", "");
             setLink(url);
           }
           setprocessing(false);
@@ -220,8 +218,12 @@ const App: React.FC = () => {
               <br />
               <br />
               <strong>Payment Link:</strong>{" "}
-              <a href={link} target="_blank" className="text-purple-600">
-                {link}
+              <a
+                href={link.replace("This", "")}
+                target="_blank"
+                className="text-purple-600"
+              >
+                {link.replace("This", "")}
               </a>
             </p>
           </div>
